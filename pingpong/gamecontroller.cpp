@@ -43,22 +43,35 @@ qreal delta(qreal A, qreal B, qreal C, QPointF O)
 
 void GameController::tick()
 {
-	if(delta(0, -1, m_gameScene->topRacket()->bottom(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
-		 && m_gameScene->ball()->x() >= m_gameScene->topRacket()->x()
-		 && m_gameScene->ball()->x() < m_gameScene->topRacket()->x() + m_gameScene->topRacket()->width())
+	if((delta(0, -1, m_gameScene->topRacket()->bottom(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->x() >= m_gameScene->topRacket()->x()
+			&& m_gameScene->ball()->x() < m_gameScene->topRacket()->right())
+		 ||
+		 (delta(0, -1, m_gameScene->bottomRacket()->y(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->x() >= m_gameScene->bottomRacket()->x()
+			&& m_gameScene->ball()->x() < m_gameScene->bottomRacket()->right()))
 	{
 		m_gameScene->ball()->setSpeedY(-m_gameScene->ball()->speedY());
 	}
 
-	if(delta(0, -1, m_gameScene->bottomRacket()->y(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
-		 && m_gameScene->ball()->x() >= m_gameScene->bottomRacket()->x()
-		 && m_gameScene->ball()->x() < m_gameScene->bottomRacket()->x() + m_gameScene->bottomRacket()->width())
-	{
-		m_gameScene->ball()->setSpeedY(-m_gameScene->ball()->speedY());
-	}
-
-	if(delta(-1, 0, 0, m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
-		 || delta(-1, 0, m_gameScene->width(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius())
+	if((delta(-1, 0, m_gameScene->topRacket()->x(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->y() >= m_gameScene->topRacket()->y()
+			&& m_gameScene->ball()->y() < m_gameScene->topRacket()->bottom())
+		 ||
+		 (delta(-1, 0, m_gameScene->topRacket()->right(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->y() >= m_gameScene->topRacket()->y()
+			&& m_gameScene->ball()->y() < m_gameScene->topRacket()->bottom())
+		 ||
+		 (delta(-1, 0, m_gameScene->bottomRacket()->x(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->y() >= m_gameScene->bottomRacket()->y()
+			&& m_gameScene->ball()->y() < m_gameScene->bottomRacket()->bottom())
+		 ||
+		 (delta(-1, 0, m_gameScene->bottomRacket()->right(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			&& m_gameScene->ball()->y() >= m_gameScene->bottomRacket()->y()
+			&& m_gameScene->ball()->y() < m_gameScene->bottomRacket()->bottom())
+		 ||
+		 (delta(-1, 0, 0, m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+			|| delta(-1, 0, m_gameScene->width(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()))
 	{
 		m_gameScene->ball()->setSpeedX(-m_gameScene->ball()->speedX());
 	}
