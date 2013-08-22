@@ -1,79 +1,86 @@
 #include "ball.h"
 
-Ball::Ball(double radius, double x, double y, double speedX, double speedY, QObject *parent):
+Ball::Ball(qreal radius, qreal x, qreal y, qreal speedX, qreal speedY, QObject *parent):
 	m_radius(radius),
-	m_x(x),
-	m_y(y),
-	m_speedX(speedX),
-	m_speedY(speedY),
+	m_coord(x, y),
+	m_speed(QPointF(speedX, speedY)),
 	QObject(parent)
 {
 }
 
-Ball::Ball(double radius, double x, double y, QObject *parent):
+Ball::Ball(qreal radius, qreal x, qreal y, QObject *parent):
 	Ball(radius, x, y, 0, 0, parent)
 {
 }
 
-double Ball::radius() const
+qreal Ball::radius() const
 {
 	return m_radius;
 }
 
-double Ball::x() const
+qreal Ball::x() const
 {
-	return m_x;
+	return m_coord.x();
 }
 
-void Ball::setX(double x)
+void Ball::setX(qreal x)
 {
-	if(m_x != x)
+	if(m_coord.x() != x)
 	{
-		m_x = x;
+		m_coord.setX(x);
 		emit coordChanged();
 	}
 }
 
-double Ball::y() const
+qreal Ball::y() const
 {
-	return m_y;
+	return m_coord.y();
 }
 
-void Ball::setY(double y)
+void Ball::setY(qreal y)
 {
-	if(m_y != y)
+	if(m_coord.y() != y)
 	{
-		m_y = y;
+		m_coord.setY(y);
 		emit coordChanged();
 	}
 }
 
-void Ball::setCoordinates(double x, double y)
+void Ball::setCoordinates(QPointF coord)
 {
-	if(m_y != y || m_x != x)
+	if(m_coord != coord)
 	{
-		m_x = x;
-		m_y = y;
+		m_coord = coord;
 		emit coordChanged();
 	}
 }
 
-double Ball::speedX() const
+const QPointF &Ball::coordinates() const
 {
-	return m_speedX;
+	return m_coord;
 }
 
-void Ball::setSpeedX(double speedX)
+qreal Ball::speedX() const
 {
-	m_speedX = speedX;
+	return m_speed.x();
 }
 
-double Ball::speedY() const
+void Ball::setSpeedX(qreal speedX)
 {
-	return m_speedY;
+	m_speed.setX(speedX);
 }
 
-void Ball::setSpeedY(double speedY)
+qreal Ball::speedY() const
 {
-	m_speedY = speedY;
+	return m_speed.y();
+}
+
+void Ball::setSpeedY(qreal speedY)
+{
+	m_speed.setY(speedY);
+}
+
+const QPointF &Ball::speed() const
+{
+	return m_speed;
 }

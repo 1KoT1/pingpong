@@ -3,6 +3,8 @@
 #include "racket.h"
 #include "ball.h"
 #include <QTimer>
+#include <QPoint>
+#include <cmath>
 
 const double racketSpeed = 10;
 
@@ -25,46 +27,40 @@ void GameController::racketsGoToRight()
 	moveRackets(racketSpeed);
 }
 
+qreal delta(qreal A, qreal B, qreal C, QPointF O)
+{
+	return fabs(A * O.x() + B * O.y() + C) / sqrt(A * A + B * B);
+}
+
 void GameController::tick()
 {
-	auto newX = m_gameScene->ball()->x() + m_gameScene->ball()->speedX();
-	auto newY = m_gameScene->ball()->y() + m_gameScene->ball()->speedY();
-	if(newY > m_gameScene->height())
-		newY = 0;
-	if(newY < 0)
-		newY = m_gameScene->height();
-
-	if(newX <= 0)
+	if(delta(0, -1, m_gameScene->topRacket()->bottom(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+		 && m_gameScene->ball()->x() >= m_gameScene->topRacket()->x()
+		 && m_gameScene->ball()->x() < m_gameScene->topRacket()->x() + m_gameScene->topRacket()->width())
 	{
-		newX = 0;
-		m_gameScene->ball()->setSpeedX(-m_gameScene->ball()->speedX());
-	}
-
-	if(newX >= m_gameScene->width())
-	{
-		newX = m_gameScene->width();
-		m_gameScene->ball()->setSpeedX(-m_gameScene->ball()->speedX());
-	}
-
-	if(newX >= m_gameScene->topRacket()->x()
-		 && newX <= m_gameScene->topRacket()->x() + m_gameScene->topRacket()->width()
-		 && newY >= m_gameScene->topRacket()->y()
-		 && newY <= m_gameScene->topRacket()->y() + m_gameScene->topRacket()->height())
-	{
-		newY = m_gameScene->topRacket()->y() + m_gameScene->topRacket()->height();
 		m_gameScene->ball()->setSpeedY(-m_gameScene->ball()->speedY());
 	}
 
-	if(newX >= m_gameScene->bottomRacket()->x()
-		 && newX <= m_gameScene->bottomRacket()->x() + m_gameScene->bottomRacket()->width()
-		 && newY >= m_gameScene->bottomRacket()->y()
-		 && newY <= m_gameScene->bottomRacket()->y() + m_gameScene->bottomRacket()->height())
+	if(delta(0, -1, m_gameScene->bottomRacket()->y(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+		 && m_gameScene->ball()->x() >= m_gameScene->bottomRacket()->x()
+		 && m_gameScene->ball()->x() < m_gameScene->bottomRacket()->x() + m_gameScene->bottomRacket()->width())
 	{
-		newY = m_gameScene->bottomRacket()->y();
 		m_gameScene->ball()->setSpeedY(-m_gameScene->ball()->speedY());
 	}
 
-	m_gameScene->ball()->setCoordinates(newX, newY);
+	if(delta(-1, 0, 0, m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
+		 || delta(-1, 0, m_gameScene->width(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius())
+	{
+		m_gameScene->ball()->setSpeedX(-m_gameScene->ball()->speedX());
+	}
+
+	auto newCoord = m_gameScene->ball()->coordinates() + m_gameScene->ball()->speed();
+	if(newCoord.y() > m_gameScene->height())
+		newCoord.setY(0);
+	if(newCoord.y() < 0)
+		newCoord.setY(m_gameScene->height());
+
+	m_gameScene->ball()->setCoordinates(newCoord);
 }
 
 void GameController::moveRackets(double step)

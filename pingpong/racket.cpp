@@ -1,48 +1,61 @@
 #include "racket.h"
 
-Racket::Racket(double width, double height, double x, double y, QObject *parent):
-	m_width(width),
-	m_height(height),
-	m_x(x),
-	m_y(y),
+Racket::Racket(qreal width, qreal height, qreal x, qreal y, QObject *parent):
+	m_rect(QRectF(x, y, width, height)),
 	QObject(parent)
 {
 }
 
-double Racket::width() const
+qreal Racket::width() const
 {
-	return m_width;
+	return m_rect.width();
 }
 
-double Racket::height() const
+qreal Racket::height() const
 {
-	return m_height;
+	return m_rect.height();
 }
 
-double Racket::x() const
+qreal Racket::x() const
 {
-	return m_x;
+	return m_rect.x();
 }
 
-void Racket::setX(double x)
+void Racket::setX(qreal x)
 {
-	if(m_x != x)
+	setCoordinates(QPointF(x, y()));
+}
+
+qreal Racket::y() const
+{
+	return m_rect.y();
+}
+
+void Racket::setY(qreal y)
+{
+	setCoordinates(QPointF(x(), y));
+}
+
+const QPointF &Racket::coordinates() const
+{
+	return m_rect.topLeft();
+}
+
+void Racket::setCoordinates(QPointF coordinates)
+{
+	if(m_rect.topLeft() != coordinates)
 	{
-		m_x = x;
-		emit xChanged();
+		m_rect.moveTo(coordinates);
+		emit coordChanged();
 	}
 }
 
-double Racket::y() const
+qreal Racket::bottom() const
 {
-	return m_y;
+	return m_rect.bottom();
 }
 
-void Racket::setY(double y)
+qreal Racket::right() const
 {
-	if(m_y != y)
-	{
-		m_y = y;
-		emit xChanged();
-	}
+	return m_rect.right();
 }

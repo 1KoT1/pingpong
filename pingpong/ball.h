@@ -2,68 +2,69 @@
 #define BALL_H
 
 #include <QObject>
+#include <QPoint>
 
 class Ball : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(double x READ x NOTIFY coordChanged)
-	Q_PROPERTY(double y READ y NOTIFY coordChanged)
-	Q_PROPERTY(double radius READ radius NOTIFY radiusChanged)
+	Q_PROPERTY(qreal x READ x NOTIFY coordChanged)
+	Q_PROPERTY(qreal y READ y NOTIFY coordChanged)
+	Q_PROPERTY(qreal radius READ radius NOTIFY radiusChanged)
 public:
-	Ball( double radius, ///< Радиус шарика.
-				double x,      ///< Горизонтальная координата шарика.
-				double y,      ///< Вертикальная координата шарика.
-				double speedX, ///< Горизонтальная составляющая скорости.
-				double speedY,  ///< Вертикальная составляющая скорости.
+	Ball( qreal radius, ///< Радиус шарика.
+				qreal x,      ///< Горизонтальная координата шарика.
+				qreal y,      ///< Вертикальная координата шарика.
+				qreal speedX, ///< Горизонтальная составляющая скорости.
+				qreal speedY,  ///< Вертикальная составляющая скорости.
 				QObject *parent = 0);
 
-	Ball( double radius, ///< Радиус шарика.
-				double x,      ///< Горизонтальная координата шарика.
-				double y,       ///< Вертикальная координата шарика.
+	Ball( qreal radius, ///< Радиус шарика.
+				qreal x,      ///< Горизонтальная координата шарика.
+				qreal y,       ///< Вертикальная координата шарика.
 				QObject *parent = 0);
 
 	/** Радиус шарика.*/
-	double radius() const;
+	qreal radius() const;
 
 	/** Горизонтальная координата шарика.*/
-	double x() const;
+	qreal x() const;
 	/** Установить горизонтальную координату шарика.*/
-	void setX(double x);
+	void setX(qreal x);
 
 	/** Вертикальная координата шарика.*/
-	double y() const;
+	qreal y() const;
 	/** Установить вертикальную координату шарика.*/
-	void setY(double y);
+	void setY(qreal y);
 
 	/** Установить координаты шарика.*/
-	void setCoordinates(double x, double y);
+	void setCoordinates(QPointF coordinates);
+	/** Координаты шарика.*/
+	const QPointF &coordinates() const;
 
 	/** Горизонтальная составляющая скорости.*/
-	double speedX() const;
+	qreal speedX() const;
 	/** Установить горизонтальную составляющую скорости.*/
-	void setSpeedX(double speedX);
+	void setSpeedX(qreal speedX);
 
 	/** Вертикальная составляющая скорости.*/
-	double speedY() const;
+	qreal speedY() const;
 	/** Установить вертикальную составляющую скорости.*/
-	void setSpeedY(double speedY);
+	void setSpeedY(qreal speedY);
 
+	/** Скорость.*/
+	const QPointF &speed() const;
 signals:
 	void coordChanged();
 	void radiusChanged();
 private:
 	/** Радиус шарика.*/
-	double m_radius;
+	qreal m_radius;
 
-	/** Горизонтальная координата шарика.*/
-	double m_x;
-	/** Вертикальная координата шарика.*/
-	double m_y;
+	/** Координаты шарика.*/
+	QPointF m_coord;
 
 	/** Горизонтальная составляющая скорости.*/
-	double m_speedX;
-	/** Вертикальная составляющая скорости.*/
-	double m_speedY;
+	QPointF m_speed;
 
 };
 

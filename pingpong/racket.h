@@ -2,47 +2,50 @@
 #define RACKET_H
 
 #include <QObject>
+#include <QRect>
 
 class Racket : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(double x READ x NOTIFY xChanged)
-	Q_PROPERTY(double y READ y NOTIFY yChanged)
-	Q_PROPERTY(double width READ width NOTIFY widthChanged)
-	Q_PROPERTY(double height READ height NOTIFY heightChanged)
+	Q_PROPERTY(qreal x READ x NOTIFY coordChanged)
+	Q_PROPERTY(qreal y READ y NOTIFY coordChanged)
+	Q_PROPERTY(qreal width READ width NOTIFY widthChanged)
+	Q_PROPERTY(qreal height READ height NOTIFY heightChanged)
 public:
-	Racket(double width, double height, double x, double y, QObject *parent = 0);
+	Racket(qreal width, qreal height, qreal x, qreal y, QObject *parent = 0);
 
 	/** Ширина ракетки.*/
-	double width() const;
+	qreal width() const;
 	/** Высота ракетки.*/
-	double height() const;
+	qreal height() const;
 
 	/** Горизонтальная координата ракетки.*/
-	double x() const;
+	qreal x() const;
 	/** Установить горизонтальную координату ракетки.*/
-	void setX(double x);
+	void setX(qreal x);
 
-	/** Вертикальная координата шарика.*/
-	double y() const;
+	/** Вертикальная координата ракетки.*/
+	qreal y() const;
 	/** Установить вертикальную координату шарика.*/
-	void setY(double y);
+	void setY(qreal y);
 
+	/** Координаты шарика.*/
+	const QPointF &coordinates() const;
+	/** Установить координаты шарика.*/
+	void setCoordinates(QPointF coordinates);
+
+	/** Нижняя граница ракетки.*/
+	qreal bottom() const;
+
+	/** Паравая граница ракетки.*/
+	qreal right() const;
 signals:
-	void xChanged();
-	void yChanged();
+	void coordChanged();
 	void widthChanged();
 	void heightChanged();
 private:
-	/** Ширина ракетки.*/
-	double m_width;
-	/** Высота ракетки.*/
-	double m_height;
-
-	/** Горизонтальная координата ракетки.*/
-	double m_x;
-	/** Вертикальная координата шарика.*/
-	double m_y;
+	/** Размеры и положение ракетки.*/
+	QRectF m_rect;
 };
 
 #endif // RACKET_H
