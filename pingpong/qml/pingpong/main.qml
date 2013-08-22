@@ -23,8 +23,8 @@ Rectangle {
 
     Image {
         id: ball
-        x: gameScene.ball.x //- gameScene.ball.radius
-        y: gameScene.ball.y //- gameScene.ball.radius
+        x: gameScene.ball.x - gameScene.ball.radius
+        y: gameScene.ball.y - gameScene.ball.radius
         width: gameScene.ball.radius * 2
         height: width
         source: "ball.png"

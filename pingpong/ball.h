@@ -8,6 +8,7 @@ class Ball : public QObject
 	Q_OBJECT
 	Q_PROPERTY(double x READ x NOTIFY xChanged)
 	Q_PROPERTY(double y READ y NOTIFY yChanged)
+	Q_PROPERTY(double radius READ radius NOTIFY radiusChanged)
 public:
 	Ball( double radius, ///< Радиус шарика.
 				double x,      ///< Горизонтальная координата шарика.
@@ -47,6 +48,7 @@ public:
 signals:
 	void xChanged();
 	void yChanged();
+	void radiusChanged();
 private:
 	/** Радиус шарика.*/
 	double m_radius;
