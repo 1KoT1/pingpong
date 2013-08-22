@@ -5,9 +5,9 @@ const double racketWidth = 100, racketHeight = 10;
 GameScene::GameScene(double width, double height):
 	m_width(width),
 	m_height(height),
-	m_ball(Ball(10, width / 2, height / 2)),
-	m_topRacket(Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, 0)),
-	m_bottomRacket(Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, height - racketHeight))
+	m_ball(new Ball(10, width / 2, height / 2)),
+	m_topRacket(new Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, 0)),
+	m_bottomRacket(new Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, height - racketHeight))
 {
 }
 
@@ -21,17 +21,17 @@ double GameScene::height() const
 	return m_height;
 }
 
-const Ball *GameScene::ball() const
+Ball *GameScene::ball() const
 {
-	return &m_ball;
+	return m_ball.get();
 }
 
-const Racket *GameScene::topRacket() const
+Racket *GameScene::topRacket() const
 {
-	return &m_topRacket;
+	return m_topRacket.get();
 }
 
-const Racket *GameScene::bottomRacket() const
+Racket *GameScene::bottomRacket() const
 {
-	return &m_bottomRacket;
+	return m_bottomRacket.get();
 }
