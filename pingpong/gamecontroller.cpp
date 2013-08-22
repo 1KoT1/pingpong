@@ -22,6 +22,10 @@ void GameController::racketsGoToRight()
 
 void GameController::moveRackets(double step)
 {
-	m_gameScene->bottomRacket()->setX(m_gameScene->bottomRacket()->x() + step);
-	m_gameScene->topRacket()->setX(m_gameScene->bottomRacket()->x());
+	auto position = m_gameScene->bottomRacket()->x() + step;
+	if(position >= 0 && position <= m_gameScene->width() - m_gameScene->bottomRacket()->width())
+	{
+		m_gameScene->bottomRacket()->setX(position);
+		m_gameScene->topRacket()->setX(position);
+	}
 }
