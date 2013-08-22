@@ -15,6 +15,9 @@ public:
 	Q_INVOKABLE void racketsGoToLeft();
 	/** Переместить ракетки вправо.*/
 	Q_INVOKABLE void racketsGoToRight();
+
+public slots:
+	void tick();
 private:
 	GameScene *m_gameScene;
 
