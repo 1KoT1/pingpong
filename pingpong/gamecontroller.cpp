@@ -27,6 +27,15 @@ void GameController::racketsGoToRight()
 	moveRackets(racketSpeed);
 }
 
+void GameController::setRacketsPosition(qreal position)
+{
+	if(position >= 0 && position <= m_gameScene->width() - m_gameScene->bottomRacket()->width())
+	{
+		m_gameScene->bottomRacket()->setX(position);
+		m_gameScene->topRacket()->setX(position);
+	}
+}
+
 qreal delta(qreal A, qreal B, qreal C, QPointF O)
 {
 	return fabs(A * O.x() + B * O.y() + C) / sqrt(A * A + B * B);
@@ -65,10 +74,5 @@ void GameController::tick()
 
 void GameController::moveRackets(double step)
 {
-	auto position = m_gameScene->bottomRacket()->x() + step;
-	if(position >= 0 && position <= m_gameScene->width() - m_gameScene->bottomRacket()->width())
-	{
-		m_gameScene->bottomRacket()->setX(position);
-		m_gameScene->topRacket()->setX(position);
-	}
+	setRacketsPosition(m_gameScene->bottomRacket()->x() + step);
 }

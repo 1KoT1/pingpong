@@ -32,4 +32,10 @@ Rectangle {
     Keys.onLeftPressed:  { gameController.racketsGoToLeft(); }
     Keys.onRightPressed: { gameController.racketsGoToRight(); }
     focus: true
+
+    MouseArea{
+        anchors.fill: parent
+        hoverEnabled: true
+        onMouseXChanged: gameController.setRacketsPosition(mouseX);
+    }
 }

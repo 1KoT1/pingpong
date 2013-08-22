@@ -15,6 +15,8 @@ public:
 	Q_INVOKABLE void racketsGoToLeft();
 	/** Переместить ракетки вправо.*/
 	Q_INVOKABLE void racketsGoToRight();
+	/** Задать позицию ракеток.*/
+	Q_INVOKABLE void setRacketsPosition(qreal position);
 
 public slots:
 	void tick();
