@@ -20,6 +20,15 @@ Rectangle {
         height: gameScene.bottomRacket.height
         color: "red"
     }
+
+    Image {
+        id: ball
+        x: gameScene.ball.x //- gameScene.ball.radius
+        y: gameScene.ball.y //- gameScene.ball.radius
+        width: gameScene.ball.radius * 2
+        height: width
+        source: "ball.png"
+    }
     Keys.onLeftPressed:  { gameController.racketsGoToLeft(); }
     Keys.onRightPressed: { gameController.racketsGoToRight(); }
     focus: true
