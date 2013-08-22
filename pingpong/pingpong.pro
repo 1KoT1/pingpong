@@ -15,7 +15,8 @@ QML_IMPORT_PATH =
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     ball.cpp \
-    racket.cpp
+    racket.cpp \
+    gamescene.cpp
 
 # Installation path
 # target.path =
@@ -26,4 +27,5 @@ qtcAddDeployment()
 
 HEADERS += \
     ball.h \
-    racket.h
+    racket.h \
+    gamescene.h
