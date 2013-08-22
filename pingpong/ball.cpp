@@ -1,10 +1,10 @@
 #include "ball.h"
 
 Ball::Ball(qreal radius, qreal x, qreal y, qreal speedX, qreal speedY, QObject *parent):
+	QObject(parent),
 	m_radius(radius),
 	m_coord(x, y),
-	m_speed(QPointF(speedX, speedY)),
-	QObject(parent)
+	m_speed(QPointF(speedX, speedY))
 {
 }
 

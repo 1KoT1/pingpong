@@ -9,8 +9,8 @@
 const double racketSpeed = 10;
 
 GameController::GameController(GameScene *gameScene, QObject *parent):
-	m_gameScene(gameScene),
-	QObject(parent)
+	QObject(parent),
+	m_gameScene(gameScene)
 {
 	auto timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(tick()));

@@ -1,8 +1,8 @@
 #include "racket.h"
 
 Racket::Racket(qreal width, qreal height, qreal x, qreal y, QObject *parent):
-	m_rect(QRectF(x, y, width, height)),
-	QObject(parent)
+	QObject(parent),
+	m_rect(QRectF(x, y, width, height))
 {
 }
 
@@ -36,7 +36,7 @@ void Racket::setY(qreal y)
 	setCoordinates(QPointF(x(), y));
 }
 
-const QPointF &Racket::coordinates() const
+QPointF Racket::coordinates() const
 {
 	return m_rect.topLeft();
 }

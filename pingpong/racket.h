@@ -30,7 +30,7 @@ public:
 	void setY(qreal y);
 
 	/** Координаты шарика.*/
-	const QPointF &coordinates() const;
+	QPointF coordinates() const;
 	/** Установить координаты шарика.*/
 	void setCoordinates(QPointF coordinates);
 
