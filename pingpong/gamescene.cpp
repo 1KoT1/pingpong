@@ -7,7 +7,7 @@ const double racketWidth = 100, racketHeight = 10;
 GameScene::GameScene(double width, double height, QObject *parent):
 	m_width(width),
 	m_height(height),
-	m_ball(new Ball(10, width / 2, height / 2, 1, 1, this)),
+	m_ball(new Ball(10, width / 2, height / 2, rand() % 20 - 10, rand() % 20 - 10, this)),
 	m_topRacket(new Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, 0, this)),
 	m_bottomRacket(new Racket(racketWidth, racketHeight, width / 2 - racketWidth / 2, height - racketHeight, this)),
 	QObject(parent)
