@@ -19,6 +19,7 @@ public:
 	Q_INVOKABLE void setRacketsPosition(qreal position);
 	Q_INVOKABLE void setSceneSize(qreal width, qreal height);
 
+	void checkBallSpeed();
 public slots:
 	void tick();
 private:

@@ -40,6 +40,8 @@ void GameController::setSceneSize(qreal width, qreal height)
 {
 	m_gameScene->setSize(QSizeF(width, height));
 	m_gameScene->bottomRacket()->setY(height - m_gameScene->bottomRacket()->height());
+	if(m_gameScene->ball()->x() > width)
+		m_gameScene->ball()->setX(width);
 }
 
 qreal delta(qreal A, qreal B, qreal C, QPointF O)
@@ -47,7 +49,7 @@ qreal delta(qreal A, qreal B, qreal C, QPointF O)
 	return fabs(A * O.x() + B * O.y() + C) / sqrt(A * A + B * B);
 }
 
-void GameController::tick()
+void GameController::checkBallSpeed()
 {
 	if((delta(0, -1, m_gameScene->topRacket()->bottom(), m_gameScene->ball()->coordinates()) < m_gameScene->ball()->radius()
 			&& m_gameScene->ball()->x() >= m_gameScene->topRacket()->x()
@@ -81,6 +83,11 @@ void GameController::tick()
 	{
 		m_gameScene->ball()->setSpeedX(-m_gameScene->ball()->speedX());
 	}
+}
+
+void GameController::tick()
+{
+	checkBallSpeed();
 
 	auto newCoord = m_gameScene->ball()->coordinates() + m_gameScene->ball()->speed();
 	if(newCoord.y() > m_gameScene->height())
