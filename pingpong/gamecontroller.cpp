@@ -1,5 +1,6 @@
 #include "gamecontroller.h"
 #include "gamescene.h"
+#include "racket.h"
 
 const double racketSpeed = 10;
 

@@ -1,10 +1,11 @@
 #include "racket.h"
 
-Racket::Racket(double width, double height, double x, double y):
+Racket::Racket(double width, double height, double x, double y, QObject *parent):
 	m_width(width),
 	m_height(height),
 	m_x(x),
-	m_y(y)
+	m_y(y),
+	QObject(parent)
 {
 }
 

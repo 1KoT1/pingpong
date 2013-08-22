@@ -1,20 +1,23 @@
 #ifndef BALL_H
 #define BALL_H
 
-class Ball
+#include <QObject>
+
+class Ball : QObject
 {
+	Q_OBJECT
 public:
 	Ball( double radius, ///< Радиус шарика.
 				double x,      ///< Горизонтальная координата шарика.
 				double y,      ///< Вертикальная координата шарика.
 				double speedX, ///< Горизонтальная составляющая скорости.
-				double speedY  ///< Вертикальная составляющая скорости.
-				);
+				double speedY,  ///< Вертикальная составляющая скорости.
+				QObject *parent);
 
 	Ball( double radius, ///< Радиус шарика.
 				double x,      ///< Горизонтальная координата шарика.
-				double y       ///< Вертикальная координата шарика.
-				);
+				double y,       ///< Вертикальная координата шарика.
+				QObject *parent);
 
 	/** Радиус шарика.*/
 	double radius() const;

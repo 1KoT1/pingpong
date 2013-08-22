@@ -1,12 +1,14 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include <memory>
-#include "ball.h"
-#include "racket.h"
+#include <QObject>
 
-class GameScene
+class Ball;
+class Racket;
+
+class GameScene : QObject
 {
+	Q_OBJECT
 public:
 	GameScene(double width, double height);
 
@@ -25,9 +27,9 @@ private:
 	/** Высота поля.*/
 	double m_height;
 
-	std::unique_ptr<Ball> m_ball;
-	std::unique_ptr<Racket> m_topRacket;
-	std::unique_ptr<Racket> m_bottomRacket;
+	Ball *m_ball;
+	Racket *m_topRacket;
+	Racket *m_bottomRacket;
 };
 
 #endif // GAMESCENE_H

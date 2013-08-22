@@ -1,16 +1,17 @@
 #include "ball.h"
 
-Ball::Ball(double radius, double x, double y, double speedX, double speedY):
+Ball::Ball(double radius, double x, double y, double speedX, double speedY, QObject *parent):
 	m_radius(radius),
 	m_x(x),
 	m_y(y),
 	m_speedX(speedX),
-	m_speedY(speedY)
+	m_speedY(speedY),
+	QObject(parent)
 {
 }
 
-Ball::Ball(double radius, double x, double y):
-	Ball(radius, x, y, 0, 0)
+Ball::Ball(double radius, double x, double y, QObject *parent):
+	Ball(radius, x, y, 0, 0, parent)
 {
 }
 

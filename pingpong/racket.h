@@ -1,10 +1,13 @@
 #ifndef RACKET_H
 #define RACKET_H
 
-class Racket
+#include <QObject>
+
+class Racket : QObject
 {
+	Q_OBJECT
 public:
-	Racket(double width, double height, double x, double y);
+	Racket(double width, double height, double x, double y, QObject *parent);
 
 	/** Ширина ракетки.*/
 	double width() const;

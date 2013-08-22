@@ -1,10 +1,13 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
+#include <QObject>
+
 class GameScene;
 
-class GameController
+class GameController: QObject
 {
+	Q_OBJECT
 public:
 	GameController(GameScene *gameScene);
 
