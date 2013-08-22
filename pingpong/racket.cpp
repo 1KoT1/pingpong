@@ -26,7 +26,11 @@ double Racket::x() const
 
 void Racket::setX(double x)
 {
-	m_x = x;
+	if(m_x != x)
+	{
+		m_x = x;
+		emit xChanged();
+	}
 }
 
 double Racket::y() const
@@ -36,5 +40,9 @@ double Racket::y() const
 
 void Racket::setY(double y)
 {
-	m_y = y;
+	if(m_y != y)
+	{
+		m_y = y;
+		emit xChanged();
+	}
 }

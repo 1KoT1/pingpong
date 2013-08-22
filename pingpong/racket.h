@@ -3,11 +3,15 @@
 
 #include <QObject>
 
-class Racket : QObject
+class Racket : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(double x READ x NOTIFY xChanged)
+	Q_PROPERTY(double y READ y NOTIFY yChanged)
+	Q_PROPERTY(double width READ width NOTIFY widthChanged)
+	Q_PROPERTY(double height READ height NOTIFY heightChanged)
 public:
-	Racket(double width, double height, double x, double y, QObject *parent);
+	Racket(double width, double height, double x, double y, QObject *parent = 0);
 
 	/** Ширина ракетки.*/
 	double width() const;
@@ -23,6 +27,12 @@ public:
 	double y() const;
 	/** Установить вертикальную координату шарика.*/
 	void setY(double y);
+
+signals:
+	void xChanged();
+	void yChanged();
+	void widthChanged();
+	void heightChanged();
 private:
 	/** Ширина ракетки.*/
 	double m_width;

@@ -27,7 +27,11 @@ double Ball::x() const
 
 void Ball::setX(double x)
 {
-	m_x = x;
+	if(m_x != x)
+	{
+		m_x = x;
+		emit xChanged();
+	}
 }
 
 double Ball::y() const
@@ -37,7 +41,11 @@ double Ball::y() const
 
 void Ball::setY(double y)
 {
-	m_y = y;
+	if(m_y != y)
+	{
+		m_y = y;
+		emit yChanged();
+	}
 }
 
 double Ball::speedX() const

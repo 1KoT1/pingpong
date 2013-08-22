@@ -5,16 +5,16 @@
 
 class GameScene;
 
-class GameController: QObject
+class GameController: public QObject
 {
 	Q_OBJECT
 public:
-	GameController(GameScene *gameScene);
+	GameController(GameScene *gameScene, QObject *parent = 0);
 
 	/** Переместить ракетки влево.*/
-	void racketsGoToLeft();
+	Q_INVOKABLE void racketsGoToLeft();
 	/** Переместить ракетки вправо.*/
-	void racketsGoToRight();
+	Q_INVOKABLE void racketsGoToRight();
 private:
 	GameScene *m_gameScene;
 

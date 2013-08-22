@@ -4,8 +4,9 @@
 
 const double racketSpeed = 10;
 
-GameController::GameController(GameScene *gameScene):
-	m_gameScene(gameScene)
+GameController::GameController(GameScene *gameScene, QObject *parent):
+	m_gameScene(gameScene),
+	QObject(parent)
 {
 }
 
