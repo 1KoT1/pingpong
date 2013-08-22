@@ -30,7 +30,7 @@ void Ball::setX(double x)
 	if(m_x != x)
 	{
 		m_x = x;
-		emit xChanged();
+		emit coordChanged();
 	}
 }
 
@@ -44,7 +44,17 @@ void Ball::setY(double y)
 	if(m_y != y)
 	{
 		m_y = y;
-		emit yChanged();
+		emit coordChanged();
+	}
+}
+
+void Ball::setCoordinates(double x, double y)
+{
+	if(m_y != y || m_x != x)
+	{
+		m_x = x;
+		m_y = y;
+		emit coordChanged();
 	}
 }
 

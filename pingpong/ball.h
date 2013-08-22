@@ -6,8 +6,8 @@
 class Ball : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(double x READ x NOTIFY xChanged)
-	Q_PROPERTY(double y READ y NOTIFY yChanged)
+	Q_PROPERTY(double x READ x NOTIFY coordChanged)
+	Q_PROPERTY(double y READ y NOTIFY coordChanged)
 	Q_PROPERTY(double radius READ radius NOTIFY radiusChanged)
 public:
 	Ball( double radius, ///< Радиус шарика.
@@ -35,6 +35,9 @@ public:
 	/** Установить вертикальную координату шарика.*/
 	void setY(double y);
 
+	/** Установить координаты шарика.*/
+	void setCoordinates(double x, double y);
+
 	/** Горизонтальная составляющая скорости.*/
 	double speedX() const;
 	/** Установить горизонтальную составляющую скорости.*/
@@ -46,8 +49,7 @@ public:
 	void setSpeedY(double speedY);
 
 signals:
-	void xChanged();
-	void yChanged();
+	void coordChanged();
 	void radiusChanged();
 private:
 	/** Радиус шарика.*/

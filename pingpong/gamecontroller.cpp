@@ -64,8 +64,7 @@ void GameController::tick()
 		m_gameScene->ball()->setSpeedY(-m_gameScene->ball()->speedY());
 	}
 
-	m_gameScene->ball()->setX(newX);
-	m_gameScene->ball()->setY(newY);
+	m_gameScene->ball()->setCoordinates(newX, newY);
 }
 
 void GameController::moveRackets(double step)
