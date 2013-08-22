@@ -17,6 +17,7 @@ public:
 	Q_INVOKABLE void racketsGoToRight();
 	/** Задать позицию ракеток.*/
 	Q_INVOKABLE void setRacketsPosition(qreal position);
+	Q_INVOKABLE void setSceneSize(qreal width, qreal height);
 
 public slots:
 	void tick();

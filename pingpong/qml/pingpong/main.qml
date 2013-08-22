@@ -11,6 +11,8 @@ Rectangle {
         height: gameScene.topRacket.height
         color: "red"
     }
+    onWidthChanged: gameController.setSceneSize(width, height);
+    onHeightChanged: gameController.setSceneSize(width, height);
 
     Rectangle{
         id: bottomRacket

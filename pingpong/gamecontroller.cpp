@@ -36,6 +36,12 @@ void GameController::setRacketsPosition(qreal position)
 	}
 }
 
+void GameController::setSceneSize(qreal width, qreal height)
+{
+	m_gameScene->setSize(QSizeF(width, height));
+	m_gameScene->bottomRacket()->setY(height - m_gameScene->bottomRacket()->height());
+}
+
 qreal delta(qreal A, qreal B, qreal C, QPointF O)
 {
 	return fabs(A * O.x() + B * O.y() + C) / sqrt(A * A + B * B);
